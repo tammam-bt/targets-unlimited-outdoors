@@ -49,6 +49,26 @@ To add a campaign: duplicate an `<article class="slide">`, set its `--accent`
 and `--cta` custom properties, point the wall at that campaign's images, and add
 a matching `.dot` button. The script picks up the new count automatically.
 
+## Light and dark themes
+
+A toggle sits in the utility bar. Behaviour:
+
+- follows the operating system's `prefers-color-scheme` on a first visit
+- a click stores the choice in `localStorage`, and that choice then wins
+- keeps following the OS only while the visitor has not chosen for themselves
+- an inline script in `<head>` applies the theme before first paint, so there is
+  no flash of the wrong palette
+- the button reports state with `aria-pressed` and swaps its accessible label
+
+Every colour is a semantic custom property on `:root` (dark is the default), and
+`[data-theme="light"]` redefines only those tokens. Brand colours are constant
+across both. The hero needed real work rather than a token swap: the wall filter,
+its opacity, and both scrim gradients are themed, so in light mode the product
+wall reads as a watermark rather than a dark field. Blaze orange darkens to
+`#C2510E` in light mode to hold contrast against the paper ground.
+
+The utility bar and footer stay dark in both themes as a brand anchor.
+
 ## Seasonal campaign slot
 
 `<section class="ev">` is built to be swapped each season. Change `--event` in
